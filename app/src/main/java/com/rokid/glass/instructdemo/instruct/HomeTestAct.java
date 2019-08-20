@@ -9,11 +9,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.rokid.glass.instruct.Integrate.InstructionActivity;
+import com.rokid.glass.instruct.entity.IInstructReceiver;
+import com.rokid.glass.instruct.entity.InstructConfig;
+import com.rokid.glass.instruct.entity.InstructEntity;
 import com.rokid.glass.instructdemo.R;
-import com.rokid.localskills.sdk.instruct.Integrate.InstructionActivity;
-import com.rokid.localskills.sdk.instruct.entity.IInstructReceiver;
-import com.rokid.localskills.sdk.instruct.entity.InstructConfig;
-import com.rokid.localskills.sdk.instruct.entity.InstructEntity;
 
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
 import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
