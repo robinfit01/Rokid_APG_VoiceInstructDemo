@@ -76,7 +76,7 @@ public class HomeTestAct extends InstructionActivity {
                 .addInstructEntity(
                         new InstructEntity()
                                 .setName("上一个")
-                                .setHelpInfo("显示上一个视频图片")
+                                .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
@@ -87,7 +87,7 @@ public class HomeTestAct extends InstructionActivity {
                 .addInstructEntity(
                         new InstructEntity()
                                 .setName("下一个")
-                                .setHelpInfo("显示下一个视频图片")
+                                .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
@@ -98,7 +98,8 @@ public class HomeTestAct extends InstructionActivity {
                 .addInstructEntity(
                         new InstructEntity()
                                 .setName("进入视频")
-                                .setHelpInfo("进入当前视频详情页面")
+                                .setShowTips(true)
+                                .setIgnoreHelp(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
@@ -109,7 +110,6 @@ public class HomeTestAct extends InstructionActivity {
                 .addInstructEntity(
                         new InstructEntity()
                                 .setName("测试")
-                                .setHelpInfo("测试一下当前语音")
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
@@ -122,8 +122,15 @@ public class HomeTestAct extends InstructionActivity {
     }
 
     @Override
+    public void onInstrucUiReady() {
+        super.onInstrucUiReady();
+
+        setMenuShowing(true);
+    }
+
+    @Override
     protected void onDestroy() {
-        clearWtWords();
+//        clearWtWords();
         super.onDestroy();
     }
 
@@ -158,15 +165,10 @@ public class HomeTestAct extends InstructionActivity {
     public boolean doReceiveCommand(String command) {
         Log.d(TAG, "doReceiveCommand command = " + command);
 
-        showCmdToast(command);
         if ("测试".equals(command)) {
             return true;
         }
         return false;
-    }
-
-    private void showCmdToast(final String cmd) {
-        setCurrentInstruction(cmd);
     }
 
     private void setCurrentSelect(final int current) {

@@ -8,6 +8,7 @@ import com.rokid.glass.instruct.Integrate.InstructionActivity;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
 import com.rokid.glass.instruct.entity.InstructConfig;
 import com.rokid.glass.instruct.entity.InstructEntity;
+import com.rokid.glass.instruct.type.NumberTypeControler;
 import com.rokid.glass.instructdemo.R;
 
 import cn.jzvd.Jzvd;
@@ -56,8 +57,7 @@ public class ShowVideoAct extends InstructionActivity {
                         new InstructEntity()
                                 .setName("播放")
                                 .setPinYin("bo fang")
-                                .setMargins(100.0f)
-                                .setHelpInfo("播放视频")
+                                .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
@@ -69,15 +69,14 @@ public class ShowVideoAct extends InstructionActivity {
                         new InstructEntity()
                                 .setName("暂停")
                                 .setPinYin("zan ting")
-                                .setMargins(100.0f)
-                                .setHelpInfo("暂停视频播放")
+                                .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
                                         pause();
                                     }
                                 })
-                );
+                ).addInstructList(NumberTypeControler.doTypeControl("第", 3, 20, "页"));
 
         return config;
     }
@@ -88,12 +87,7 @@ public class ShowVideoAct extends InstructionActivity {
         if ("返回".equals(command)) {
             exit();
         }
-        showCmdToast(command);
         return false;
-    }
-
-    private void showCmdToast(final String cmd) {
-        setCurrentInstruction(cmd);
     }
 
     private void play() {

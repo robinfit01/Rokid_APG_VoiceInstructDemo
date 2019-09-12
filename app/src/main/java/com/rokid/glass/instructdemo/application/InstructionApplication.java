@@ -26,8 +26,6 @@ public class InstructionApplication extends Application {
                         .setGlobal(true)
                         .setName("返回")
                         .setPinYin("fan hui")
-                        .setMargins(100.0f)
-                        .setHelpInfo("退出当前页面")
                         .setCallback(new IInstructReceiver() {
                             @Override
                             public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
