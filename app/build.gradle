@@ -39,5 +39,5 @@ dependencies {
     implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
 
-    implementation 'com.rokid.ai.glass:instructsdk:1.0.2'
+    implementation 'com.rokid.ai.glass:instructsdk:1.0.3'
 }

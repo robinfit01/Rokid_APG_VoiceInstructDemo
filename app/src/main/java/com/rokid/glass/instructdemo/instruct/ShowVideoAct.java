@@ -76,8 +76,12 @@ public class ShowVideoAct extends InstructionActivity {
                                         pause();
                                     }
                                 })
-                ).addInstructList(NumberTypeControler.doTypeControl("第", 3, 20, "页"));
-
+                ).addInstructList(NumberTypeControler.doTypeControl("第", 3, 20, "页", new NumberTypeControler.NumberTypeCallBack() {
+            @Override
+            public void onInstructReceive(Activity act, String key, int number, InstructEntity instruct) {
+                Log.d(TAG, "AudioAi Number onInstructReceive command = " + key + ", number = " + number);
+            }
+        }));
         return config;
     }
 
