@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:keepScreenOn="true"
+    tools:context=".test.OrderItemAct">
+
+    <Button
+        android:id="@+id/jump_demo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/btn_bg"
+        android:text="本地指令Demo"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/order_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/jump_demo"
+        android:orientation="vertical"
+        >
+
+    </LinearLayout>
+
+</RelativeLayout>

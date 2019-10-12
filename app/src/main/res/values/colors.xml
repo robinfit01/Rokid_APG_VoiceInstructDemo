@@ -19,4 +19,8 @@
     <color name="orange">#FADCA7</color>
     <color name="yellow">#EEFF41</color>
     <color name="default_background">#3d3d3d</color>
+
+    <color name="btn_bg_normal">#C1C1C1</color>
+    <color name="btn_bg_focused">#005799</color>
+    <color name="btn_bg_pressed">#FF0099</color>
 </resources>

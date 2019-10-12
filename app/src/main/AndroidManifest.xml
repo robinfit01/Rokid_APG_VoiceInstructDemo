@@ -3,6 +3,8 @@
     package="com.rokid.glass.instructdemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.InstructionApplication"
@@ -15,12 +17,23 @@
 
 
         <activity
-            android:name=".instruct.ShowVideoAct"
+        android:name=".instruct.ShowVideoAct"
+        android:configChanges="orientation|screenSize|keyboardHidden"
+        android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".instruct.HomeTestAct"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape">
+        </activity>
+
+        <activity
+            android:name=".test.OrderItemAct"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape" />
 
         <activity
-            android:name=".instruct.HomeTestAct"
+            android:name=".test.OrderListAct"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape">
 
