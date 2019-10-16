@@ -7,8 +7,8 @@
 ## 测试使用说明
 ### 1. 安装Demo App
 ```
-adb install ***.apk
-// 项目的 app/release/app-release.apk
+adb install VoiceInstructDemo.apk
+// 项目中的 release/VoiceInstructDemo.apk
 ```
 ### 2. 准备测试指令配置
 
