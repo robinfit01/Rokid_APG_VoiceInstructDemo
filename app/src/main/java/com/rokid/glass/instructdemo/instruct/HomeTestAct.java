@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
@@ -104,6 +105,40 @@ public class HomeTestAct extends InstructionActivity {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
                                         openVideo();
+                                    }
+                                })
+                )
+                .addInstructEntity(
+                        new InstructEntity()
+                                .setName("确认")
+                                .setShowTips(true)
+                                .setIgnoreHelp(true)
+                                .setCallback(new IInstructReceiver() {
+                                    @Override
+                                    public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(HomeTestAct.this, "确认", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                })
+                )
+                .addInstructEntity(
+                        new InstructEntity()
+                                .setName("绿色")
+                                .setShowTips(true)
+                                .setIgnoreHelp(true)
+                                .setCallback(new IInstructReceiver() {
+                                    @Override
+                                    public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(HomeTestAct.this, "绿色", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                     }
                                 })
                 )

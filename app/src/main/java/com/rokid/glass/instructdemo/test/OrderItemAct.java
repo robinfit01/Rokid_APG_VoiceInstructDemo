@@ -142,6 +142,7 @@ public class OrderItemAct extends InstructionActivity {
 
     private void showOrder(String order) {
         if (order != null && mInfoView != null) {
+            Log.d(TAG,"Order_Active show : " + order);
             String info = getTimeText() + ", 激活：" + order + "\n";
             mInfoView.append(info);
             scrollTextEndLine();
