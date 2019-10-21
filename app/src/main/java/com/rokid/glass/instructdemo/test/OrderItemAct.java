@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
@@ -44,6 +45,7 @@ public class OrderItemAct extends InstructionActivity {
     protected void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_item);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mInfoView = findViewById(R.id.show_text);
         mInfoView.setMovementMethod(ScrollingMovementMethod.getInstance());

@@ -3,6 +3,7 @@ package com.rokid.glass.instructdemo.instruct;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
@@ -27,6 +28,7 @@ public class ShowVideoAct extends InstructionActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_video);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         String url = getIntent().getStringExtra(PARAM_VIDEO_URL);
         String name = getIntent().getStringExtra(PARAM_VIDEO_NAME);
