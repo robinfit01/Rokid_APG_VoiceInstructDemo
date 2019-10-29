@@ -17,14 +17,9 @@ buildscript {
 allprojects {
     repositories {
 
-        //snapshot仓库Uri
-        maven {url "http://mvnrepo.rokid-inc.com/nexus/content/repositories/snapshots/"}
-        //release仓库Uri
-        maven {url "http://mvnrepo.rokid-inc.com/nexus/content/repositories/releases/"}
-
         google()
         jcenter()
-        
+
     }
 }
 
