@@ -1,0 +1,108 @@
+
+def tFile = file("./src")
+def runTask = true
+def tTree = fileTree(dir:"./src", include: "**/**.java")
+
+
+task hello {
+    println "this is hello test!"
+    ext {
+        aaa = "book"
+        bbb = "apple"
+    }
+    ext.yyy = "gggggggggggg"
+    doLast {
+        println "hello hello hello hello!"
+        println "the properties yyy = " + transform(yyy)
+//        printFile(tFile)
+        tTree.each { file ->
+            println "Java :" + file.path
+        }
+    }
+
+}
+
+def transform(String targetStr) {
+    return new String(targetStr.getBytes("iso8859-1"), "UTF-8")
+}
+
+hello.onlyIf {
+    runTask
+}
+
+def printFile(File tFile) {
+    if (tFile.isDirectory()) {
+        tFile.listFiles().each { f ->
+            printFile(f)
+        }
+    } else {
+        println "real file: " + tFile.path
+    }
+}
+
+task copyTest(type: Copy) {
+    from "./src"
+    into "../test"
+    include '**/*.java'
+    rename { fileName ->
+        "MM_" + fileName
+    }
+    doLast {
+        println "task copyTest " + new Date().toString()
+    }
+}
+
+task zipTest {
+    doLast {
+        ant.zip(destfile: '../testzzz.zip') {
+            fileset(dir: '../test') {
+                include(name: '**/*.java')
+            }
+        }
+
+        println "task zipTest " + new Date().toString()
+    }
+}
+
+task cleanTest(type: Delete) {
+    delete "../test"
+    doLast {
+        println "task cleanTest " + new Date().toString()
+    }
+}
+
+zipTest.dependsOn copyTest
+cleanTest.dependsOn zipTest
+
+task antPl {
+    doLast {
+        ant.echo("this ant echo execute")
+        ant.println "this ant echo execute"
+        println "buildDir = " + buildDir
+    }
+}
+
+class GreetingPluginExtension {
+    String message
+    String greeter
+}
+
+class GreetingPlugin implements Plugin<Project> {
+    void apply(Project project) {
+        def extension = project.extensions.create('mm', GreetingPluginExtension)
+        project.task('mytest') {
+            doLast {
+                println "${extension.message} from ${extension.greeter}"
+                println  project.getProperties().get("mm").message + " from " + project.mm.greeter
+            }
+        }
+    }
+}
+
+apply plugin: GreetingPlugin
+
+mm {
+    message "lalala"
+    greeter "hahaha"
+}
+
