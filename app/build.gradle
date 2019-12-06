@@ -40,7 +40,7 @@ dependencies {
     // 语音离线指令SDK使用 -- begin
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.promeg:tinypinyin:2.0.3'
-    implementation 'com.rokid.ai.glass:instructsdk:1.1.1'
+    implementation 'com.rokid.ai.glass:instructsdk:1.1.2'
     // 语音离线指令SDK使用 -- end
 }
 
