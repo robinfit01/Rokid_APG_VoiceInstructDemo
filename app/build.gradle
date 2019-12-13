@@ -38,9 +38,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.8.0'
 
     // 语音离线指令SDK使用 -- begin
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.github.promeg:tinypinyin:2.0.3'
-    implementation 'com.rokid.ai.glass:instructsdk:1.1.2'
+    implementation 'com.rokid.ai.glass:instructsdk:1.1.5'
     // 语音离线指令SDK使用 -- end
 }
 

@@ -1,6 +1,8 @@
 package com.rokid.glass.instructdemo.instruct;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
+import com.rokid.glass.instruct.VoiceInstruction;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
 import com.rokid.glass.instruct.entity.InstructConfig;
 import com.rokid.glass.instruct.entity.InstructEntity;
@@ -121,36 +124,9 @@ public class HomeTestAct extends InstructionActivity {
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Toast.makeText(HomeTestAct.this, "确认", Toast.LENGTH_SHORT).show();
+                                                openDialog();
                                             }
                                         });
-                                    }
-                                })
-                )
-                .addInstructEntity(
-                        new InstructEntity()
-                                .setName("绿色")
-                                .setShowTips(true)
-                                .setIgnoreHelp(true)
-                                .setCallback(new IInstructReceiver() {
-                                    @Override
-                                    public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Toast.makeText(HomeTestAct.this, "绿色", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    }
-                                })
-                )
-                .addInstructEntity(
-                        new InstructEntity()
-                                .setName("测试")
-                                .setCallback(new IInstructReceiver() {
-                                    @Override
-                                    public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
-                                        openVideo();
                                     }
                                 })
                 );
@@ -167,7 +143,6 @@ public class HomeTestAct extends InstructionActivity {
 
     @Override
     protected void onDestroy() {
-//        clearWtWords();
         super.onDestroy();
     }
 
@@ -177,9 +152,11 @@ public class HomeTestAct extends InstructionActivity {
         switch (keyCode) {
             case KEYCODE_DPAD_LEFT:
                 doLast();
+//                restartVoiceServer(true, false);
                 return true;
             case KEYCODE_DPAD_RIGHT:
                 doNext();
+//                restartVoiceServer(false, false);
                 return true;
             case KEYCODE_ENTER:
             case KEYCODE_DPAD_CENTER:
@@ -190,6 +167,10 @@ public class HomeTestAct extends InstructionActivity {
         }
 
         return super.onKeyUp(keyCode, event);
+    }
+
+    private void restartVoiceServer(boolean mustRestart, boolean configAllUseSolution) {
+        VoiceInstruction.restartVoiceServer(HomeTestAct.this, mustRestart, configAllUseSolution, mInstructionManager);
     }
 
     /**
@@ -248,5 +229,36 @@ public class HomeTestAct extends InstructionActivity {
         intent.putExtra(ShowVideoAct.PARAM_VIDEO_NAME, name);
         intent.putExtra(ShowVideoAct.PARAM_VIDEO_URL, url);
         startActivity(intent);
+    }
+
+    private void openDialog() {
+        final AlertDialog.Builder normalDialog =
+                new AlertDialog.Builder(HomeTestAct.this) {
+                    @Override
+                    public AlertDialog show() {
+                        AlertDialog dialog = super.show();
+                        WindowManager.LayoutParams attrs = dialog.getWindow().getAttributes();
+                        Log.e("yuyi", "AlertDialog window type is " + attrs.type);
+                        return dialog;
+                    }
+                };
+        normalDialog.setTitle("我是一个普通Dialog");
+        normalDialog.setMessage("你要点击哪一个按钮呢?");
+        normalDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //...To-do
+                    }
+                });
+        normalDialog.setNegativeButton("关闭",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //...To-do
+                    }
+                });
+        // 显示
+        normalDialog.show();
     }
 }
