@@ -170,7 +170,7 @@ public class HomeTestAct extends InstructionActivity {
     }
 
     private void restartVoiceServer(boolean mustRestart, boolean configAllUseSolution) {
-        VoiceInstruction.restartVoiceServer(HomeTestAct.this, mustRestart, configAllUseSolution, mInstructionManager);
+        VoiceInstruction.restartVoiceServer(HomeTestAct.this, getPackageName(), mustRestart, configAllUseSolution,false, mInstructionManager);
     }
 
     /**
