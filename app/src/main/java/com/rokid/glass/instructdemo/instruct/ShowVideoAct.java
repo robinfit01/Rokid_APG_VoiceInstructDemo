@@ -78,7 +78,7 @@ public class ShowVideoAct extends InstructionActivity {
                                         pause();
                                     }
                                 })
-                ).addInstructList(NumberTypeControler.doTypeControl("第", 3, 20, "页", "第3/4.../19/20页", new NumberTypeControler.NumberTypeCallBack() {
+                ).addInstructList(NumberTypeControler.doTypeControl("打开第", 1, 10, "个", "打开第1/2.../9/10个", new NumberTypeControler.NumberTypeCallBack() {
             @Override
             public void onInstructReceive(Activity act, String key, int number, InstructEntity instruct) {
                 Log.d(TAG, "AudioAi Number onInstructReceive command = " + key + ", number = " + number);
