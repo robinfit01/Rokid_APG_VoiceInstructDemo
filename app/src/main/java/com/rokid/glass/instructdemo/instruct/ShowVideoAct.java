@@ -6,9 +6,11 @@ import android.util.Log;
 import android.view.WindowManager;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
+import com.rokid.glass.instruct.entity.EntityKey;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
 import com.rokid.glass.instruct.entity.InstructConfig;
 import com.rokid.glass.instruct.entity.InstructEntity;
+import com.rokid.glass.instruct.type.NumberKey;
 import com.rokid.glass.instruct.type.NumberTypeControler;
 import com.rokid.glass.instructdemo.R;
 
@@ -57,8 +59,8 @@ public class ShowVideoAct extends InstructionActivity {
         config.setActionKey(ShowVideoAct.class.getName() + InstructConfig.ACTION_SUFFIX)
                 .addInstructEntity(
                         new InstructEntity()
-                                .setName("播放")
-                                .setPinYin("bo fang")
+                                .addEntityKey(new EntityKey("播放", "bo fang"))
+                                .addEntityKey(new EntityKey(EntityKey.Language.en, "play video"))
                                 .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
@@ -69,8 +71,8 @@ public class ShowVideoAct extends InstructionActivity {
                 )
                 .addInstructEntity(
                         new InstructEntity()
-                                .setName("暂停")
-                                .setPinYin("zan ting")
+                                .addEntityKey(new EntityKey("暂停", "zan ting"))
+                                .addEntityKey(new EntityKey(EntityKey.Language.en, "stop video"))
                                 .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
@@ -78,12 +80,18 @@ public class ShowVideoAct extends InstructionActivity {
                                         pause();
                                     }
                                 })
-                ).addInstructList(NumberTypeControler.doTypeControl("打开第", 1, 10, "个", "打开第1/2.../9/10个", new NumberTypeControler.NumberTypeCallBack() {
-            @Override
-            public void onInstructReceive(Activity act, String key, int number, InstructEntity instruct) {
-                Log.d(TAG, "AudioAi Number onInstructReceive command = " + key + ", number = " + number);
-            }
-        }));
+                )
+                .addInstructList(NumberTypeControler.doTypeControl(3, 20,
+                        new NumberTypeControler.NumberTypeCallBack() {
+                            @Override
+                            public void onInstructReceive(Activity act, String key, int number, InstructEntity instruct) {
+                                Log.d(TAG, "AudioAi Number onInstructReceive command = " + key + ", number = " + number);
+                            }
+                        },
+                        new NumberKey(EntityKey.Language.zh, "第", "页", "可以说第3/4.../20页"),
+                        new NumberKey(EntityKey.Language.en, "the", "page", "the 3/4.../20 page")
+                        )
+                );
         return config;
     }
 

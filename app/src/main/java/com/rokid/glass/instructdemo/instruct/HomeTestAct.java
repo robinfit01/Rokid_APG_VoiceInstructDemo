@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
 import com.rokid.glass.instruct.VoiceInstruction;
+import com.rokid.glass.instruct.entity.EntityKey;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
 import com.rokid.glass.instruct.entity.InstructConfig;
 import com.rokid.glass.instruct.entity.InstructEntity;
@@ -81,7 +82,8 @@ public class HomeTestAct extends InstructionActivity {
         config.setActionKey(HomeTestAct.class.getName() + InstructConfig.ACTION_SUFFIX)
                 .addInstructEntity(
                         new InstructEntity()
-                                .setName("上一个")
+                                .addEntityKey(new EntityKey("上一个", null))
+                                .addEntityKey(new EntityKey(EntityKey.Language.en, "last one"))
                                 .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
@@ -92,7 +94,8 @@ public class HomeTestAct extends InstructionActivity {
                 )
                 .addInstructEntity(
                         new InstructEntity()
-                                .setName("下一个")
+                                .addEntityKey(new EntityKey("下一个", null))
+                                .addEntityKey(new EntityKey(EntityKey.Language.en, "next one"))
                                 .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
@@ -103,7 +106,8 @@ public class HomeTestAct extends InstructionActivity {
                 )
                 .addInstructEntity(
                         new InstructEntity()
-                                .setName("进入视频")
+                                .addEntityKey(new EntityKey("进入视频", null))
+                                .addEntityKey(new EntityKey(EntityKey.Language.en, "open video"))
                                 .setShowTips(true)
                                 .setIgnoreHelp(true)
                                 .setCallback(new IInstructReceiver() {
@@ -115,7 +119,8 @@ public class HomeTestAct extends InstructionActivity {
                 )
                 .addInstructEntity(
                         new InstructEntity()
-                                .setName("确认")
+                                .addEntityKey(new EntityKey("测试", null))
+                                .addEntityKey(new EntityKey(EntityKey.Language.en, "test this"))
                                 .setShowTips(true)
                                 .setIgnoreHelp(true)
                                 .setCallback(new IInstructReceiver() {

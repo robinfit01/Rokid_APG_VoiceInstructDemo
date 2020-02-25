@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
+import com.rokid.glass.instruct.entity.EntityKey;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
 import com.rokid.glass.instruct.entity.InstructConfig;
 import com.rokid.glass.instruct.entity.InstructEntity;
@@ -67,7 +68,7 @@ public class OrderItemAct extends InstructionActivity {
                 if (!TextUtils.isEmpty(order)) {
                     config.addInstructEntity(
                             new InstructEntity()
-                                    .setName(order)
+                                    .addEntityKey(new EntityKey(order, null))
                                     .setCallback(new IInstructReceiver() {
                                         @Override
                                         public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
