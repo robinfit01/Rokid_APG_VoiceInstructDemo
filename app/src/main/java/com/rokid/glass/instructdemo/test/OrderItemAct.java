@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -63,12 +64,14 @@ public class OrderItemAct extends InstructionActivity {
         InstructConfig config = new InstructConfig();
         config.setActionKey(OrderItemAct.class.getName() + InstructConfig.ACTION_SUFFIX);
         mOrderList = getOrderByFile();
+        String language = Locale.getDefault().getLanguage();
         if (mOrderList != null) {
             for (String order: mOrderList) {
                 if (!TextUtils.isEmpty(order)) {
+                    EntityKey key = "en".equals(language) ? new EntityKey(EntityKey.Language.en, order) : new EntityKey(order, null);
                     config.addInstructEntity(
                             new InstructEntity()
-                                    .addEntityKey(new EntityKey(order, null))
+                                    .addEntityKey(key)
                                     .setCallback(new IInstructReceiver() {
                                         @Override
                                         public void onInstructReceive(Activity act, String key, InstructEntity instruct) {

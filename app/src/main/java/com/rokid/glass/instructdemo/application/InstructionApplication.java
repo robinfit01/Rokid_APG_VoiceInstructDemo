@@ -1,11 +1,8 @@
 package com.rokid.glass.instructdemo.application;
 
-import android.app.Activity;
 import android.app.Application;
 
 import com.rokid.glass.instruct.VoiceInstruction;
-import com.rokid.glass.instruct.entity.IInstructReceiver;
-import com.rokid.glass.instruct.entity.InstructEntity;
 
 
 /**
@@ -21,23 +18,5 @@ public class InstructionApplication extends Application {
         super.onCreate();
 
         VoiceInstruction.init(this);
-//        VoiceInstruction.getInstance().addGlobalInstruct(
-//                new InstructEntity()
-//                        .setGlobal(true)
-//                        .setName("返回")
-//                        .setPinYin("fan hui")
-//                        .setCallback(new IInstructReceiver() {
-//                            @Override
-//                            public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
-//                                try {
-//                                    if (act != null) {
-//                                        act.finish();
-//                                    }
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        })
-//        );
     }
 }

@@ -143,7 +143,7 @@ public class HomeTestAct extends InstructionActivity {
     public void onInstrucUiReady() {
         super.onInstrucUiReady();
 
-        setMenuShowing(true);
+        setMenuShowing(false);
     }
 
     @Override
