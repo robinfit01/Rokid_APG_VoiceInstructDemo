@@ -63,6 +63,7 @@ public class OrderItemAct extends InstructionActivity {
     public InstructConfig configInstruct() {
         InstructConfig config = new InstructConfig();
         config.setActionKey(OrderItemAct.class.getName() + InstructConfig.ACTION_SUFFIX);
+        config.setIgnoreSystem(true);
         mOrderList = getOrderByFile();
         String language = Locale.getDefault().getLanguage();
         if (mOrderList != null) {

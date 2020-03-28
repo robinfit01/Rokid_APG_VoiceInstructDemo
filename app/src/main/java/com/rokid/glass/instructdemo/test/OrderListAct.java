@@ -59,6 +59,7 @@ public class OrderListAct extends InstructionActivity {
     public InstructConfig configInstruct() {
         InstructConfig config = new InstructConfig();
         config.setActionKey(OrderListAct.class.getName() + InstructConfig.ACTION_SUFFIX);
+        config.setIgnoreSystem(true);
         return config;
     }
 

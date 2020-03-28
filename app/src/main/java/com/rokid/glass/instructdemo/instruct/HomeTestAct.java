@@ -11,7 +11,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
 import com.rokid.glass.instruct.VoiceInstruction;
