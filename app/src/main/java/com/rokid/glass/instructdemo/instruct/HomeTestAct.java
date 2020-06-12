@@ -141,8 +141,9 @@ public class HomeTestAct extends InstructionActivity {
     @Override
     public void onInstrucUiReady() {
         super.onInstrucUiReady();
-
-        setMenuShowing(false);
+        if (mInstructionManager != null) {
+            mInstructionManager.setLeftBackShowing(false);
+        }
     }
 
     @Override
