@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ public class OrderItemAct extends InstructionActivity {
     public static final String PARAM_ITEM_FILE = "item_file";
 
     private TextView mInfoView;
-    private List<String> mOrderList;
+    private List<Pair<String, String>> mOrderList;
 
     @Override
     protected void onCreate(@NonNull Bundle savedInstanceState) {
@@ -52,8 +53,17 @@ public class OrderItemAct extends InstructionActivity {
         mInfoView = findViewById(R.id.show_text);
         mInfoView.setMovementMethod(ScrollingMovementMethod.getInstance());
         if (mOrderList != null && mOrderList.size() > 0) {
-            mInfoView.setText("设置测试指令：" + Arrays.toString(mOrderList.toArray()) + "\n\n\n"
-                    + "开始测试：\n");
+            StringBuffer buffer = new StringBuffer();
+            buffer.append("设置测试指令：[" );
+            for (Pair<String, String> pair : mOrderList) {
+                if (TextUtils.isEmpty(pair.second)) {
+                    buffer.append(pair.first + ", " );
+                } else {
+                    buffer.append("{" + pair.first + ", " + pair.second + "}, " );
+                }
+            }
+            buffer.append("]\n\n\n"+ "开始测试：\n");
+            mInfoView.setText(buffer.toString());
         } else {
             mInfoView.setText("无设置测试指令\n\n\n" + "开始测试：\n");
         }
@@ -67,9 +77,9 @@ public class OrderItemAct extends InstructionActivity {
         mOrderList = getOrderByFile();
         String language = Locale.getDefault().getLanguage();
         if (mOrderList != null) {
-            for (String order: mOrderList) {
-                if (!TextUtils.isEmpty(order)) {
-                    EntityKey key = "en".equals(language) ? new EntityKey(EntityKey.Language.en, order) : new EntityKey(order, null);
+            for (Pair<String, String> order: mOrderList) {
+                if (!TextUtils.isEmpty(order.first)) {
+                    EntityKey key = "en".equals(language) ? new EntityKey(EntityKey.Language.en, order.first) : new EntityKey(order.first, order.second);
                     config.addInstructEntity(
                             new InstructEntity()
                                     .addEntityKey(key)
@@ -115,18 +125,24 @@ public class OrderItemAct extends InstructionActivity {
         return false;
     }
 
-    private List<String> getOrderByFile(){
+    private List<Pair<String, String>> getOrderByFile(){
         String fileName = getIntent().getStringExtra(PARAM_ITEM_FILE);
         if (!TextUtils.isEmpty(fileName)) {
             File file = new File(fileName);
             if (file.exists() && file.isFile()) {
-                final List<String> tempList = new ArrayList<>();
+                final List<Pair<String, String>> tempList = new ArrayList<>();
                 BufferedReader br = null;
                 String readLine = null;
                 try {
                     br = new BufferedReader(new FileReader(file));
                     while ((readLine = br.readLine()) != null) {
-                        tempList.add(readLine);
+                        String[] outArray = readLine.split(",");
+                        if (outArray.length == 2) {
+                            tempList.add(new Pair<>(outArray[0], outArray[1]));
+                            Log.d(TAG, "getOrderByFile name = " + outArray[0] + ", pinyin = " + outArray[1]);
+                        } else {
+                            tempList.add(new Pair<>(readLine, null));
+                        }
                     }
                     br.close();
                 } catch (Exception e) {
