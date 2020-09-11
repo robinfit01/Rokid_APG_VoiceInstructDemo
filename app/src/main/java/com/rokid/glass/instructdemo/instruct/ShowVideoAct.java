@@ -2,13 +2,13 @@ package com.rokid.glass.instructdemo.instruct;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
 
-import com.rokid.glass.instruct.Integrate.InstructionActivity;
+import com.rokid.glass.instruct.InstructLifeManager;
 import com.rokid.glass.instruct.entity.EntityKey;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
-import com.rokid.glass.instruct.entity.InstructConfig;
 import com.rokid.glass.instruct.entity.InstructEntity;
 import com.rokid.glass.instruct.type.NumberKey;
 import com.rokid.glass.instruct.type.NumberTypeControler;
@@ -17,12 +17,17 @@ import com.rokid.glass.instructdemo.R;
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
 
-public class ShowVideoAct extends InstructionActivity {
+/**
+ * Video InstructLifeManager 方式测试
+ */
+public class ShowVideoAct extends AppCompatActivity {
 
     private static final String TAG = ShowVideoAct.class.getSimpleName();
 
     public static final String PARAM_VIDEO_NAME = "video_name";
     public static final String PARAM_VIDEO_URL = "video_url";
+
+    private InstructLifeManager mLifeManager;
 
     private JzvdStd mJzvdStd;
 
@@ -31,6 +36,7 @@ public class ShowVideoAct extends InstructionActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_video);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        configInstruct();
 
         String url = getIntent().getStringExtra(PARAM_VIDEO_URL);
         String name = getIntent().getStringExtra(PARAM_VIDEO_NAME);
@@ -53,11 +59,9 @@ public class ShowVideoAct extends InstructionActivity {
         Jzvd.releaseAllVideos();
     }
 
-    @Override
-    public InstructConfig configInstruct() {
-        InstructConfig config = new InstructConfig();
-        config.setActionKey(ShowVideoAct.class.getName() + InstructConfig.ACTION_SUFFIX)
-                .addInstructEntity(
+    public void configInstruct() {
+        mLifeManager = new InstructLifeManager(this, getLifecycle(), mInstructLifeListener);
+        mLifeManager.addInstructEntity(
                         new InstructEntity()
                                 .addEntityKey(new EntityKey("播放", "bo fang"))
                                 .addEntityKey(new EntityKey(EntityKey.Language.en, "play video"))
@@ -92,17 +96,32 @@ public class ShowVideoAct extends InstructionActivity {
                         new NumberKey(EntityKey.Language.en, "the", "page", "the 3/4.../20 page")
                         )
                 );
-        return config;
     }
 
-    @Override
-    public boolean doReceiveCommand(String command) {
-        Log.d(TAG, "doReceiveCommand command = " + command);
-        if ("返回".equals(command)) {
-            exit();
+    private InstructLifeManager.IInstructLifeListener mInstructLifeListener = new InstructLifeManager.IInstructLifeListener() {
+        @Override
+        public boolean onInterceptCommand(String command) {
+            Log.d(TAG, "doReceiveCommand command = " + command);
+            if ("返回".equals(command)) {
+                exit();
+            }
+            return false;
         }
-        return false;
-    }
+
+        @Override
+        public void onTipsUiReady() {
+            Log.d("AudioAi", "onTipsUiReady Call ");
+            if (mLifeManager != null) {
+                mLifeManager.setMenuShowing(false);
+                mLifeManager.setLeftBackShowing(true);
+            }
+        }
+
+        @Override
+        public void onHelpLayerShow(boolean show) {
+
+        }
+    };
 
     private void play() {
         if (mJzvdStd != null && mJzvdStd.startButton != null) {

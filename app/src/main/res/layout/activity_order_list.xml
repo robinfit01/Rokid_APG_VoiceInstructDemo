@@ -10,7 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         >
@@ -31,5 +31,60 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <FrameLayout
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/demo_btn_002"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_bg"
+            android:text="安装" />
+
+        <Button
+            android:id="@+id/demo_btn_003"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="150dp"
+            android:background="@drawable/btn_bg"
+            android:text="更新" />
+
+
+        <Button
+            android:id="@+id/demo_btn_004"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="300dp"
+            android:background="@drawable/btn_bg"
+            android:text="卸载" />
+
+        <Button
+            android:id="@+id/demo_btn_005"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/btn_bg"
+            android:text="跳转" />
+
+        <Button
+            android:id="@+id/demo_btn_006"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="200dp"
+            android:background="@drawable/btn_bg"
+            android:text="显示" />
+
+    </FrameLayout>
+
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.rokid.glass.instruct.Integrate.InstructionActivity;
 import com.rokid.glass.instruct.entity.InstructConfig;
@@ -53,13 +54,37 @@ public class OrderListAct extends InstructionActivity {
         });
 
         initLinearBtn();
+
+        initAutoTestBtn();
     }
+
+    public void initAutoTestBtn() {
+        findViewById(R.id.demo_btn_002).setOnClickListener(clickListener);
+        findViewById(R.id.demo_btn_003).setOnClickListener(clickListener);
+        findViewById(R.id.demo_btn_004).setOnClickListener(clickListener);
+        findViewById(R.id.demo_btn_005).setOnClickListener(clickListener);
+        findViewById(R.id.demo_btn_006).setOnClickListener(clickListener);
+
+        findViewById(R.id.demo_btn_003).setVisibility(View.GONE);
+        findViewById(R.id.demo_btn_004).setVisibility(View.GONE);
+        findViewById(R.id.demo_btn_005).setEnabled(false);
+
+    }
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (v instanceof Button) {
+                Toast.makeText(v.getContext(), ((Button) v).getText() + " Clicked", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     @Override
     public InstructConfig configInstruct() {
         InstructConfig config = new InstructConfig();
         config.setActionKey(OrderListAct.class.getName() + InstructConfig.ACTION_SUFFIX);
-        config.setIgnoreSystem(true);
+        config.setIgnoreSystem(false);
         return config;
     }
 
@@ -155,4 +180,24 @@ public class OrderListAct extends InstructionActivity {
             }
         }
     };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
