@@ -102,13 +102,23 @@ public class HomeTestAct extends AppCompatActivity {
                 )
                 .addInstructEntity(
                         new InstructEntity()
-                                .addEntityKey(new EntityKey("下一个", null))
-                                .addEntityKey(new EntityKey(EntityKey.Language.en, "next one"))
+                                .addEntityKey(new EntityKey("展示帮助", "zhan shi bang zhu"))
                                 .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
-                                        doNext();
+                                        mLifeManager.showHelpLayer();
+                                    }
+                                })
+                )
+                .addInstructEntity(
+                        new InstructEntity()
+                                .addEntityKey(new EntityKey("隐藏帮助", "yin cang bang zhu"))
+                                .setShowTips(true)
+                                .setCallback(new IInstructReceiver() {
+                                    @Override
+                                    public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
+                                        mLifeManager.hideHelpLayer();
                                     }
                                 })
                 )
