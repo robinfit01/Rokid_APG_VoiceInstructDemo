@@ -19,3 +19,110 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# 代码混淆压缩比，在0~7之间
+-optimizationpasses 5
+
+# 混合时不使用大小写混合，混合后的类名为小写
+-dontusemixedcaseclassnames
+
+# 指定不去忽略非公共库的类
+-dontskipnonpubliclibraryclasses
+
+# 不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。
+-dontpreverify
+
+-verbose
+
+#google推荐算法
+-optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
+
+# 避免混淆Annotation、内部类、泛型、匿名类
+-keepattributes *Annotation*,InnerClasses,Signature,EnclosingMethod
+
+# 重命名抛出异常时的文件名称
+-renamesourcefileattribute SourceFile
+
+# 抛出异常时保留代码行号
+-keepattributes SourceFile,LineNumberTable
+
+# 处理support包
+-dontnote android.support.**
+-dontwarn android.support.**
+
+# 保留四大组件，自定义的Application等这些类不被混淆
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Appliction
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.preference.Preference
+-keep public class com.android.vending.licensing.ILicensingService
+
+# 保留本地native方法不被混淆
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# 保留枚举类不被混淆
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# 保留Parcelable序列化类不被混淆
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+#保留Keep注解的类名和方法
+-keep,allowobfuscation @interface android.support.annotation.Keep
+-keep @android.support.annotation.Keep class *
+-keepclassmembers class * {
+    @android.support.annotation.Keep *;
+}
+
+##保留自定义的Test类和类成员不被混淆
+#-keep class com.lily.Test {*;}
+##保留自定义的xlog文件夹下面的类、类成员和方法不被混淆
+#-keep class com.test.xlog.** {
+#    <fields>;
+#    <methods>;
+#}
+
+# 语音插件sdk不被混淆
+-keep class com.rokid.glass.instruct.** {*;}
+
+# LifeCycle不被混淆
+-keep class android.arch.lifecycle.** {*;}
+
+# PinYin不被混淆
+-keep class com.github.promeg.pinyinhelper.** {*;}
+
+# gson不被混淆
+-keepattributes Signature
+
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+
+# Gson specific classes
+-dontwarn sun.misc.**
+#-keep class com.google.gson.stream.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** { <fields>; }
+
+# Prevent proguard from stripping interface information from TypeAdapter, TypeAdapterFactory,
+# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
+-keep class * extends com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+
+# Prevent R8 from leaving Data object members always null
+-keepclassmembers,allowobfuscation class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+
+
+
