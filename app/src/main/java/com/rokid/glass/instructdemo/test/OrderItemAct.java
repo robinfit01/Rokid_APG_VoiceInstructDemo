@@ -100,7 +100,9 @@ public class OrderItemAct extends InstructionActivity {
     @Override
     public void onInstrucUiReady() {
         super.onInstrucUiReady();
-        setMenuShowing(true);
+        if (mInstructionManager != null) {
+            mInstructionManager.hideTipsLayer();
+        }
     }
 
     @Override
