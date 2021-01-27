@@ -33,6 +33,16 @@
             android:screenOrientation="landscape" />
 
         <activity
+            android:name=".instruct.NoAllInstructLifeAct"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".instruct.NoAllInstructBaseExtendAct"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape" />
+
+        <activity
             android:name=".test.OrderListAct"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape">
