@@ -64,4 +64,9 @@ adb push 测试2.txt /sdcard/glassOrderTest/
 
 
 
+## 在线ASR、TTS功能使用
+
+SpeechTestAct 中展示了Asr、Tts功能的正确使用方式
+
+
 

@@ -16,10 +16,9 @@ buildscript {
 
 allprojects {
     repositories {
-
         google()
+        maven {url('https://maven.rokid.com/repository/maven-public/')}
         jcenter()
-
     }
 }
 

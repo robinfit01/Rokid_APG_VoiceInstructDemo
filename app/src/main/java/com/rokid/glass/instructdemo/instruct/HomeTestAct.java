@@ -16,6 +16,7 @@ import com.rokid.glass.instruct.entity.EntityKey;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
 import com.rokid.glass.instruct.entity.InstructEntity;
 import com.rokid.glass.instructdemo.R;
+import com.rokid.glass.instructdemo.speech.SpeechTestAct;
 
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
 import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
@@ -102,12 +103,14 @@ public class HomeTestAct extends AppCompatActivity {
                 )
                 .addInstructEntity(
                         new InstructEntity()
-                                .addEntityKey(new EntityKey("展示帮助", "zhan shi bang zhu"))
+                                .addEntityKey(new EntityKey("语音测试", "yu yin ce shi"))
                                 .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
-                                        mLifeManager.showHelpLayer();
+                                        if (act != null) {
+                                            act.startActivity(new Intent(act, SpeechTestAct.class));
+                                        }
                                     }
                                 })
                 )
