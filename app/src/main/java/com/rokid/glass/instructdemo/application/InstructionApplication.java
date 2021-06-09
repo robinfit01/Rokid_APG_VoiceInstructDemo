@@ -1,13 +1,14 @@
 package com.rokid.glass.instructdemo.application;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.rokid.glass.instruct.VoiceInstruction;
+import com.rokid.glass.instruct.entity.EntityKey;
+import com.rokid.glass.instruct.entity.IInstructReceiver;
+import com.rokid.glass.instruct.entity.InstructEntity;
 
 
-/**
- * Created by k.liang on 2018/6/22 16:36
- */
 public class InstructionApplication extends Application {
 
     /**
@@ -17,6 +18,30 @@ public class InstructionApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // 插件独立控制模式
         VoiceInstruction.init(this);
+
+        // 插件和百灵鸟自动指令共用模式
+//        VoiceInstruction.init(this, false);
+
+        VoiceInstruction.getInstance().addGlobalInstruct(
+                new InstructEntity()
+                        .setGlobal(true)
+                        .addEntityKey(new EntityKey("离开", "li kai"))
+                        .addEntityKey(new EntityKey(EntityKey.Language.en, "back last page"))
+                        .setCallback(new IInstructReceiver() {
+                            @Override
+                            public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
+                                try {
+                                    if (act != null) {
+                                        act.finish();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+        );
+
     }
 }

@@ -189,6 +189,9 @@ public class OrderListAct extends InstructionActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (mInstructionManager != null) {
+            mInstructionManager.hideTipsLayer();
+        }
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.rokid.glass.instruct.entity.EntityKey;
 import com.rokid.glass.instruct.entity.IInstructReceiver;
 import com.rokid.glass.instruct.entity.InstructEntity;
 import com.rokid.glass.instructdemo.R;
+import com.rokid.glass.instructdemo.service.ServiceTestAct;
 import com.rokid.glass.instructdemo.speech.SpeechTestAct;
 
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
@@ -103,25 +104,27 @@ public class HomeTestAct extends AppCompatActivity {
                 )
                 .addInstructEntity(
                         new InstructEntity()
-                                .addEntityKey(new EntityKey("语音测试", "yu yin ce shi"))
+                                .addEntityKey(new EntityKey("服务测试", "fu wu ce shi"))
+                                .addEntityKey(new EntityKey(EntityKey.Language.en, "service test"))
                                 .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
                                         if (act != null) {
-                                            act.startActivity(new Intent(act, SpeechTestAct.class));
+                                            act.startActivity(new Intent(act, ServiceTestAct.class));
                                         }
                                     }
                                 })
                 )
                 .addInstructEntity(
                         new InstructEntity()
-                                .addEntityKey(new EntityKey("隐藏帮助", "yin cang bang zhu"))
+                                .addEntityKey(new EntityKey("隐藏浮条", "yin cang fu tiao"))
+                                .addEntityKey(new EntityKey(EntityKey.Language.en, "hide tips"))
                                 .setShowTips(true)
                                 .setCallback(new IInstructReceiver() {
                                     @Override
                                     public void onInstructReceive(Activity act, String key, InstructEntity instruct) {
-                                        mLifeManager.hideHelpLayer();
+                                        mLifeManager.hideTipsLayer();
                                     }
                                 })
                 )

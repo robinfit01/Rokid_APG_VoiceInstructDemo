@@ -48,6 +48,17 @@
             android:screenOrientation="landscape" />
 
         <activity
+            android:name=".service.ServiceTestAct"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape" />
+
+        <service android:name=".service.InstructTestService" android:enabled="true" android:exported="true">
+            <intent-filter >
+                <action android:name="com.rokid.glass.instructdemo.InstructService"/>
+            </intent-filter>
+        </service>
+
+        <activity
             android:name=".test.OrderListAct"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape">

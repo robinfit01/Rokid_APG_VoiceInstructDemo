@@ -6,8 +6,8 @@ android {
         applicationId "com.rokid.glass.instructdemo"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 21
-        versionName "1.1.2"
+        versionCode 22
+        versionName "1.1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -38,7 +38,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.8.0'
 
     // 语音离线指令SDK使用 -- begin
-    implementation 'com.rokid.ai.glass:instructsdk:1.6.0'
+    implementation 'com.rokid.ai.glass:instructsdk:1.6.1'
     // 语音离线指令SDK使用 -- end
 }
 
